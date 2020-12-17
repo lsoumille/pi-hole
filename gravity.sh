@@ -378,6 +378,7 @@ gravity_DownloadBlocklists() {
     url="${sources[$i]}"
     domain="${sourceDomains[$i]}"
     id="${sourceIDs[$i]}"
+    api_key="$(sqlite3 "${gravityDBfile}" "SELECT api_key FROM vw_adlist WHERE id = ${%id};")"
 
     # Save the file as list.#.domain
     saveLocation="${piholeDir}/list.${id}.${domain}.${domainsExtension}"
@@ -391,6 +392,15 @@ gravity_DownloadBlocklists() {
       "pgl.yoyo.org") cmd_ext="-d mimetype=plaintext -d hostformat=hosts";;
       *) cmd_ext="";;
     esac
+
+    # Add API Key to cmd_ext if it exists
+    if [ -z "$api_key" ]
+    then
+      echo -ne "  ${INFO} No API Key provided for domain ${domain}"
+    else
+      echo -ne "  ${INFO} Add API Key to cmd_ext for domain ${domain}"
+      cmd_ext+="  --header ""Authorization: ${api_key}"""
+    fi
 
     echo -e "  ${INFO} Target: ${url}"
     local regex

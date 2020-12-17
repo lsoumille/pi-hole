@@ -32,7 +32,8 @@ CREATE TABLE adlist
 	date_added INTEGER NOT NULL DEFAULT (cast(strftime('%s', 'now') as int)),
 	date_modified INTEGER NOT NULL DEFAULT (cast(strftime('%s', 'now') as int)),
 	comment TEXT,
-	date_updated INTEGER
+	date_updated INTEGER,
+  api_key TEXT
 );
 
 CREATE TABLE adlist_by_group
@@ -140,7 +141,7 @@ CREATE VIEW vw_gravity AS SELECT domain, adlist_by_group.group_id AS group_id
     LEFT JOIN "group" ON "group".id = adlist_by_group.group_id
     WHERE adlist.enabled = 1 AND (adlist_by_group.group_id IS NULL OR "group".enabled = 1);
 
-CREATE VIEW vw_adlist AS SELECT DISTINCT address, adlist.id AS id
+CREATE VIEW vw_adlist AS SELECT DISTINCT address, adlist.id AS id, api_key
     FROM adlist
     LEFT JOIN adlist_by_group ON adlist_by_group.adlist_id = adlist.id
     LEFT JOIN "group" ON "group".id = adlist_by_group.group_id

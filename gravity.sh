@@ -378,7 +378,7 @@ gravity_DownloadBlocklists() {
     url="${sources[$i]}"
     domain="${sourceDomains[$i]}"
     id="${sourceIDs[$i]}"
-    api_key="$(sqlite3 "${gravityDBfile}" "SELECT api_key FROM vw_adlist WHERE id = ${%id};")"
+    api_key="$(sqlite3 "${gravityDBfile}" "SELECT api_key FROM vw_adlist WHERE id = ${id};")"
 
     # Save the file as list.#.domain
     saveLocation="${piholeDir}/list.${id}.${domain}.${domainsExtension}"

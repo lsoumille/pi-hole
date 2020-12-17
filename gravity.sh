@@ -396,9 +396,9 @@ gravity_DownloadBlocklists() {
     # Add API Key to cmd_ext if it exists
     if [ -z "$api_key" ]
     then
-      echo -ne "  ${INFO} No API Key provided for domain ${domain}"
+      echo -e "  ${INFO} No API Key provided for domain ${domain}"
     else
-      echo -ne "  ${INFO} Add API Key to cmd_ext for domain ${domain}"
+      echo -e "  ${INFO} Add API Key to cmd_ext for domain ${domain}"
       cmd_ext+="  --header ""Authorization: ${api_key}"""
     fi
 

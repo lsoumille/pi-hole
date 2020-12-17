@@ -55,7 +55,7 @@ CREATE TABLE info
 	value TEXT NOT NULL
 );
 
-INSERT INTO "info" VALUES('version','13');
+INSERT INTO "info" VALUES('version','14');
 
 CREATE TABLE domain_audit
 (

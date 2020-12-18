@@ -542,9 +542,9 @@ make_repo() {
     # Check current branch. If it is master, then reset to the latest available tag.
     # In case extra commits have been added after tagging/release (i.e in case of metadata updates/README.MD tweaks)
     curBranch=$(git rev-parse --abbrev-ref HEAD)
-    if [[ "${curBranch}" == "master" ]]; then #If we're calling make_repo() then it should always be master, we may not need to check.
-         git reset --hard "$(git describe --abbrev=0 --tags)" || return $?
-    fi
+    # if [[ "${curBranch}" == "master" ]]; then #If we're calling make_repo() then it should always be master, we may not need to check.
+    #      git reset --hard "$(git describe --abbrev=0 --tags)" || return $?
+    # fi
     # Show a colored message showing it's status
     printf "%b  %b %s\\n" "${OVER}" "${TICK}" "${str}"
     # Data in the repositories is public anyway so we can make it readable by everyone (+r to keep executable permission if already set by git)

@@ -399,7 +399,7 @@ gravity_DownloadBlocklists() {
       echo -e "  ${INFO} No API Key provided for domain ${domain}"
     else
       echo -e "  ${INFO} Add API Key to cmd_ext for domain ${domain}"
-      cmd_ext+="  --header ""Authorization: ${api_key}"""
+      cmd_ext+="  --header \"Authorization: ${api_key}\""
     fi
 
     echo -e "  ${INFO} Target: ${url}"

@@ -399,7 +399,7 @@ gravity_DownloadBlocklists() {
       echo -e "  ${INFO} No API Key provided for domain ${domain}"
     else
       echo -e "  ${INFO} Add API Key to cmd_ext for domain ${domain}"
-      cmd_ext+="  --header \"Authorization: ${api_key}\""
+      cmd_ext+=" -H 'Authorization:${api_key}'"
     fi
 
     echo -e "  ${INFO} Target: ${url}"
@@ -535,7 +535,7 @@ gravity_DownloadBlocklistFromUrl() {
   fi
 
   # shellcheck disable=SC2086
-  httpCode=$(curl -s -L ${compression} ${cmd_ext} ${heisenbergCompensator} -w "%{http_code}" -A "${agent}" "${url}" -o "${patternBuffer}" 2> /dev/null)
+  httpCode="$(eval "curl -s -L ${compression} ${cmd_ext} ${heisenbergCompensator} -w \"%{http_code}\" -A \"${agent}\" \"${url}\" -o \"${patternBuffer}\" 2> /dev/null")"
 
   case $url in
     # Did we "download" a local file?
